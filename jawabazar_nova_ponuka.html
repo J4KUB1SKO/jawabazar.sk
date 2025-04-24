@@ -1,0 +1,185 @@
+<html>
+    <body>
+        
+        <ul>
+            <li><a class="active" href="jawabazar_aboutus.html"><strong>O nás</strong></a></li>
+            <li><a class="active" href="jawabazar_main.html"><strong>Domov</strong></a></li>
+            <li><a class="active" href="jawabazar_ponuky.html"><strong>Ponuky</strong></a></li>
+            <li><a class="active" href="jawabazar_recenzie.html"><strong>Recenzie</strong></a></li>
+            <li style="float: right"><a href="jawabazar_nova_ponuka.html"><strong>+ Vytvoriť novú ponuku</strong></a></li>
+        </ul>
+
+        <br><br><br><br>
+
+        <div class="ramcek">
+            <p class="font">Ak chcete vytvoriť novú ponuku na predaj, vypíšte tento formulár:</p>
+            <form id="predaj_form">
+                <label for="typ">Čo predávate? <select name="typ" id="typ">
+                    <option value="vybrat">Vyberte niečo</option>
+                    <option value="Motor">Motor</option>
+                    <option value="Podvozok">Podvozok</option>
+                    <option value="Elektro">Elektronika</option>
+                    <option value="Kolesá a Brzdy">Kolesá, brzdy</option>
+                    <option value="Ostatné">Ostatné diely</option>
+                </select></label>
+
+                <label for="znacka">Značka: <select name="znacka" id="znacka">
+                    <option value="vybrat">Vyberte niečo</option>
+                    <option value="Jawa">Jawa</option>
+                    <option value="Jawa Pionier">Jawa Pionier</option>
+                    <option value="Čezeta">Čezeta</option>
+                    <option value="Babetta">Babetta</option>
+                </select></label>
+
+                <label for="cena">Za koľko? (€) <input type="number" name="cena" id="cena" placeholder="napr. 250"></label>
+
+                <label for="meno">Meno a Priezvisko: <input type="text" name="meno" id="meno" placeholder="napr. Jozef Mrkvička"></label>
+
+                <label for="tel">Telefónne číslo: <input type="number" name="tel" id="tel" placeholder="napr. 0912345678"></label>
+
+                <label for="mesto">Mesto a PSČ: <input type="text" name="mesto" id="mesto" placeholder="napr. Bratislava, 821 05" ></label>
+
+                <label for="ktomu">Text k tomu: <input type="text" name="ktomu" id="ktomu" placeholder="napr. Motor je v dobrom stave..."></label>
+
+                <input type="submit" value="Odoslať">
+            </form>
+            <p class="podtext">Po kliknutí na odoslať sa vaša ponuka zobrazí v časti Ponuky</p>
+        </div>
+
+        <script>
+            document.getElementById('predaj_form').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const typ = document.getElementById('typ').value;
+                const znacka = document.getElementById('znacka').value;
+                const cena = document.getElementById('cena').value;
+                const meno = document.getElementById('meno').value;
+                const tel = document.getElementById('tel').value;
+                const mesto = document.getElementById('mesto').value;
+                const ktomu = document.getElementById('ktomu').value;
+
+                localStorage.setItem("typ", typ);
+                localStorage.setItem("znacka", znacka);
+                localStorage.setItem("cena", cena);
+                localStorage.setItem("meno", meno);
+                localStorage.setItem("tel", tel);
+                localStorage.setItem("mesto", mesto);
+                localStorage.setItem("ktomu", ktomu);
+
+                const novaPonuka = {
+                    typ: typ,
+                    znacka: znacka,
+                    cena: cena,
+                    meno: meno,
+                    tel: tel,
+                    mesto: mesto,
+                    ktomu: ktomu
+                }
+
+                let ponuky = JSON.parse(localStorage.getItem("ponuky")) || [];
+                ponuky.push(novaPonuka);
+                localStorage.setItem("ponuky",JSON.stringify(ponuky));
+
+                window.location.href = "jawabazar_ponuky.html";
+            });
+        </script>
+
+    </body>
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #b30000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            left: 0;
+            }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: solid;
+            font-family: Arial, Helvetica, sans-serif;
+            transition-duration: 50ms;
+        }
+
+        li a:hover {
+            background-color: #800000;
+        }
+
+        p.font {
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+            font-size: larger;
+            font-weight: 900;
+        }
+        p.podtext {
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+            font-size: medium;
+            text-align: left;
+            margin-left: 10px;
+            font-style: italic;
+        }
+
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #b30000;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: large; 
+        }
+
+        input[type=number], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #b30000;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: large; 
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #b30000;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: large;
+        }
+
+        input[type=submit]:hover {
+            background-color: #800000;
+        }
+
+        .ramcek {
+            border-radius: 20px;
+            border: 5px solid #b30000;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: larger;
+            font-weight: bolder;
+        }
+    </style>
+</html>

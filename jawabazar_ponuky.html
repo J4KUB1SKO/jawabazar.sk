@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Ponuky</title>
+    </head>
+    <body>
+        
+        <ul>
+            <li><a class="active" href="jawabazar_aboutus.html"><strong>O nás</strong></a></li>
+            <li><a class="active" href="jawabazar_main.html"><strong>Domov</strong></a></li>
+            <li><a class="active" href="jawabazar_ponuky.html"><strong>Ponuky</strong></a></li>
+            <li><a class="active" href="jawabazar_recenzie.html"><strong>Recenzie</strong></a></li>
+            <li style="float: right"><a href="jawabazar_nova_ponuka.html"><strong>+ Vytvoriť novú ponuku</strong></a></li>
+        </ul>
+
+        <div id="zoznamPonuk"></div>
+
+        <br><br><br><br>
+
+
+        <script>
+
+            const ponukyDiv = document.getElementById("zoznamPonuk");
+            const ponuky = JSON.parse(localStorage.getItem("ponuky")) || [];
+
+            if (ponuky.length === 0) {
+                ponukyDiv.innerHTML = "<p>Zatiaľ nie sú pridané žiadne ponuky.</p>";
+            }
+            else {
+                ponuky.forEach((ponuka, index) => {
+                    const blok = document.createElement("div");
+                    blok.className = "ramcek";
+                    blok.innerHTML = `
+                        <p>${ponuka.ktomu}</p>
+                        <p><strong>Typ:</strong> ${ponuka.typ}</p>
+                        <p><strong>Značka:</strong> ${ponuka.znacka}</p>
+                        <p><strong>Cena:</strong> ${ponuka.cena} €</p>
+                        <p><strong>Meno:</strong> ${ponuka.meno}</p>
+                        <p><strong>Telefón:</strong> ${ponuka.tel}</p>
+                        <p><strong>Mesto:</strong> ${ponuka.mesto}</p>
+                    `;
+                    ponukyDiv.appendChild(blok);
+                });            
+            }
+            
+        </script>
+
+    </body>
+
+    <head>
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #b30000;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                left:0;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: solid;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            li a:hover {
+                background-color: #800000;
+            }
+
+            p.font_vacsi {
+                font-family: Arial, Helvetica, sans-serif;
+                color: black;
+                font-size: large;
+                font-weight: bold;
+            }
+
+            p.font_normal {
+                font-family: Arial, Helvetica, sans-serif;
+                color: black;
+                font-size: large;
+                font-weight: normal;
+            }
+
+            .ramcek {
+                padding: 10px;
+                margin: 5px;
+                background-color: white;
+                color: black;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: medium;
+                border-radius: 20px;
+                box-shadow: 0 4px 8px black;
+                margin-bottom: 20px;
+            }
+
+            #zoznamPonuk {
+                margin-top: 60px;
+            }
+        </style>
+    </head>
+</html>

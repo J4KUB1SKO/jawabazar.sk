@@ -1,0 +1,186 @@
+<html>
+    <body>
+        
+        <ul>
+            <li><a class="active" href="jawabazar_aboutus.html"><strong>O nás</strong></a></li>
+            <li><a class="active" href="jawabazar_main.html"><strong>Domov</strong></a></li>
+            <li><a class="active" href="jawabazar_ponuky.html"><strong>Ponuky</strong></a></li>
+            <li><a class="active" href="jawabazar_recenzie.html"><strong>Recenzie</strong></a></li>
+            <li style="float: right"><a href="jawabazar_nova_ponuka.html"><strong>+ Vytvoriť novú ponuku</strong></a></li>
+        </ul>
+        <br><br><br><br>
+        <div class="ramcek">
+            <p class="font_velky_center">Vítam vás na stránke Jawa Bazár.</p>
+            <p class="font_velky_center">Tu sa môžete zbaviť nepotrebných dielov motoriek Jawa a ešte k tomu zarobiť.</p>
+            <p class="font_velky_center">Ak chcete vytvoriť novú ponuku, kliknite na toto tlačidlo:</p>
+            <a href="jawabazar_nova_ponuka.html" class="button1"><strong>+ Nová Ponuka</strong></a><br><br>
+            <p class="font_velky_center">Ak si chcete pozrieť ponuky súčiastok/motoriek, tak kliknite na toto tlačidlo:</p>
+            <a href="jawabazar_ponuky.html" class="button_priehladny"><strong>Ponuky</strong></a><br><br><br><br>
+        </div>
+
+        <p class="font_velky"><strong>Novinky:</strong></p>
+
+        <div class="ramcek_plny">
+            <p class="font">
+                <strong>Jožko Mrkvička z Dolných Uľanov si opravil svoju Jawu 50/20. Trvala mu opraviť 2 roky a približne 50 človekohodín. "Do tohto Pioniera som dal celé svoje srdce a veľa úsilia. A hlavne veľa peňazí :D." povedal Jozef.</strong>
+            </p>
+            <img src="https://www.bazos.sk/img/1/675/175417675.jpg" class="obrazok">
+            <p class="podtext">Jozef Mrkvička z Doľných Uľan = Facebook</p><br><br>
+        </div><br><br><br><br><br><br>
+        
+        <div class="ramcek_plny">
+            <p class="font">
+                <strong>"Na Babettách som jazdil už keď som bol malý, preto som bol šťastný keď som si mohol užiť túto zábavu zase aj o niekoľko desaťročí neskôr."povedal Braňo z Gbelov. Jeho Babetta nie je prerobená na to, aby sa stala veteránom ale namiesto toho má omnoho vyšší výkon ako originálna Babetta. Jeho Babetta zvládne ísť až 70km/h. </strong>
+            </p>
+            <img src="https://www.bazos.sk/img/6/714/177524714.jpg?t=1744572898" class="obrazok">
+            <p class="podtext">Braňo Matula z Gbelov = Facebook</p>
+        </div><br><br>
+
+    </body>
+
+    <head>
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #b30000;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                left: 0;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: solid;
+                font-family: Arial, Helvetica, sans-serif;
+                transition-duration: 50ms;
+            }
+
+            li a:hover {
+                background-color: #800000;
+            }
+
+             /*Úprava Fontu */
+            p.font {
+                font-family: Arial, Helvetica, sans-serif;
+                color: black;
+                font-size: larger;
+                font-weight: 350;
+                text-align: left;
+                margin-left: 10px;
+            }
+
+            p.font_velky {
+                font-family: Arial, Helvetica, sans-serif;
+                color: black;
+                font-size: xx-large;
+                font-weight: bold;
+                text-align: left;
+                padding-left: 10px;
+            }
+
+            p.font_velky_center {
+                font-family: Arial, Helvetica, sans-serif;
+                color: black;
+                font-size: xx-large;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            p.podtext {
+                font-family: Arial, Helvetica, sans-serif;
+                color: black;
+                font-size: medium;
+                text-align: left;
+                margin-left: 10px;
+                font-style: italic;
+            }
+
+            /*Ǔprava fotiek*/
+            img.obrazok {
+                width: 840px;
+                height: 630px;
+                margin-left: 10px;
+                border-radius: 12px;
+            }
+
+            img.obrazok_vyska {
+                height: 630px;
+                width: 500px;
+                margin-left: 10px;
+                border-radius: 12px;
+            }
+
+            /*Tlačidlo*/
+            .button1 {
+                background-color: #b30000;
+                color: white;
+                text-align: center;
+                font-size: large;
+                border-radius: 6px;
+                align-self: center;
+                padding: 15px 32px;
+                transition-duration: 50ms;
+                font-family: Arial, Helvetica, sans-serif;
+                margin-left: 825px;
+            }
+
+            .button1:hover {
+                background-color: #800000;
+            }
+
+            .button_priehladny {
+                background-color: white;
+                border: 2px solid #b30000;
+                color: #b30000;
+                border-radius: 6px;
+                margin: auto;
+                align-self: center;
+                padding: 15px 32px;
+                transition-duration: 50ms;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 0 auto;
+                display: block;
+                position: absolute;
+                margin-left: 862px;
+
+            }
+
+            .button_priehladny:hover {
+                background-color: #b30000;
+                color: white;
+                text-align: center;
+
+            }
+
+            .ramcek {
+                background-color: linear-gradient(to bottom, #b30000, #800000);
+                color: white;
+                border-radius: 20px;
+                border: 5px solid #b30000;
+                padding: 5px;
+            }
+
+            .ramcek_plny {
+                background-color: white;
+                color: black;
+                border-radius: 20px;
+                padding: 5px;
+                margin: 5px;
+                box-shadow: 0 4px 8px gray;
+            }
+
+        </style>
+    </head>
+</html>
