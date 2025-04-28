@@ -24,6 +24,7 @@
             const ponuky = JSON.parse(localStorage.getItem("ponuky")) || [];
 
             if (ponuky.length === 0) {
+                ponukyDiv.className = "font_normal"
                 ponukyDiv.innerHTML = "<p>Zatiaľ nie sú pridané žiadne ponuky.</p>";
             }
             else {
@@ -100,7 +101,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-size: medium;
                 border-radius: 20px;
-                box-shadow: 0 4px 8px black;
+                box-shadow: 0 4px 8px grey;
                 margin-bottom: 20px;
             }
 
