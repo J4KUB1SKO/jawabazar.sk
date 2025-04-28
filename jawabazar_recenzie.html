@@ -1,48 +1,242 @@
 <html>
-    <body>
-        
-        <ul>
-            <li><a class="active" href="jawabazar_aboutus.html"><strong>O nás</strong></a></li>
-            <li><a class="active" href="index.html"><strong>Domov</strong></a></li>
-            <li><a class="active" href="jawabazar_ponuky.html"><strong>Ponuky</strong></a></li>
-            <li><a class="active" href="jawabazar_recenzie.html"><strong>Recenzie</strong></a></li>
-            <li style="float: right"><a href="jawabazar_nova_ponuka.html"><strong>+ Vytvoriť novú ponuku</strong></a></li>
-        </ul>
 
-    </body>
+<body>
 
-    <head>
-        <style>
-            
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                background-color: #b30000;
-                position: fixed;
-                top: 0;
-                width: 100%;
-                left: 0;
+    <ul>
+        <li><a class="active" href="jawabazar_aboutus.html"><strong>O nás</strong></a></li>
+        <li><a class="active" href="index.html"><strong>Domov</strong></a></li>
+        <li><a class="active" href="jawabazar_ponuky.html"><strong>Ponuky</strong></a></li>
+        <li><a class="active" href="jawabazar_recenzie.html"><strong>Recenzie</strong></a></li>
+        <li style="float: right"><a href="jawabazar_nova_ponuka.html"><strong>+ Vytvoriť novú ponuku</strong></a></li>
+    </ul>
+
+    <br><br><br>
+
+    <div class="ramcek">
+        <p class="font_velky"><strong>Ohodnoďte nás:</strong></p>
+        <form id="recenzie_form">
+            <label for="meno">Meno a Priezvisko/Prezývka <input type="text" name="meno" id="meno"
+                    placeholder="napr. Jožko Mrkvička"></label>
+
+            <label for="kupoval_predaval">Kupovali ste alebo ste predávali?
+                <select name="kupoval_predaval" id="kupoval_predaval">
+                    <option value="vybrat">Vyberte niečo</option>
+                    <option value="Kupovali">Kupoval/a som</option>
+                    <option value="Predavali">Predával/a som</option>
+                </select>
+            </label>
+
+            <label for="co_kupoval">Ak ste kupovali, tak čo ste kupovali? <input type="text" name="co_kupoval"
+                    id="co_kupoval" placeholder="napr. Valec z Babetty"></label>
+
+            <label for="co_predaval">Ak ste predávali, tak čo ste predávali? <input type="text" name="co_predaval"
+                    id="co_predaval" placeholder="napr. Kolesá z Jawy"></label>
+
+            <label for="Nazor">Aký máte na nás názor? <input type="text" name="nazor" id="nazor"
+                    placeholder="Veľmi sa mi páči..."></label>
+
+            <input type="submit" value="Odoslať">
+
+        </form>
+    </div>
+
+
+    <p class="font_extra">Názory od ostatných</p>
+
+    <div id="zoznamRecenzii"></div>
+
+    <script>
+        document.getElementById('recenzie_form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const meno = document.getElementById('meno').value;
+            const kupoval_predaval = document.getElementById('kupoval_predaval').value;
+            const co_kupoval = document.getElementById('co_kupoval').value;
+            const co_predaval = document.getElementById('co_predaval').value;
+            const nazor = document.getElementById('nazor').value;
+
+            if (kupoval_predaval === "vybrat") {
+                alert("Prosím, vyberte, či ste kupovali alebo predávali.");
+                return;
             }
 
-            li {
-                float: left;
+            if (kupoval_predaval === "Kupovali") {
+                novaRecenzia = {
+                    meno: meno,
+                    kupoval_predaval: kupoval_predaval,
+                    co_kupoval: co_kupoval,
+                    nazor: nazor
+                }
+            } else {
+                novaRecenzia = {
+                    meno: meno,
+                    kupoval_predaval: kupoval_predaval,
+                    co_predaval: co_predaval,
+                    nazor: nazor
+                }
             }
 
-            li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: solid;
-                font-family: Arial, Helvetica, sans-serif;
-            }
+            let recenzie = JSON.parse(localStorage.getItem("recenzie")) || [];
+            recenzie.push(novaRecenzia);
+            localStorage.setItem("recenzie", JSON.stringify(recenzie));
 
-            li a:hover {
-                background-color: #800000;
-            }
+            alert("Recenzia pridaná");
+            document.getElementById("meno").value = "";
+            document.getElementById("kupoval_predaval").value = "Vyberte niečo";
+            document.getElementById("co_kupoval").value = "";
+            document.getElementById("co_predaval").value = "";
+            document.getElementById("nazor").value = "";
 
-        </style>
-    </head>
+            zobrazRecenzie();
+        });
+        function zobrazRecenzie() {
+            const recenzieDiv = document.getElementById("zoznamRecenzii");
+            const recenzie = JSON.parse(localStorage.getItem("recenzie")) || [];
+
+            recenzieDiv.innerHTML = "";
+
+            if (recenzie.length === 0) {
+                recenzieDiv.className = "font_normal"
+                recenzieDiv.innerHTML = "<p>Zatiaľ nie sú pridané žiadne recenzie.</p>";
+            } else {
+                recenzie.forEach((recenzia) => {
+                    const blok = document.createElement("div");
+                    blok.className = "ramcek_shadow";
+
+                    if (recenzia.kupoval_predaval === "Kupovali") {
+                        blok.innerHTML = `
+                                <p><strong>Meno:</strong> ${recenzia.meno}</p>
+                                <p><strong>Kupoval/a som:</strong> ${recenzia.co_kupoval}</p>
+                                <p><strong>Názor:</strong> ${recenzia.nazor}</p>
+                            `;
+                    } else {
+                        blok.innerHTML = `
+                                <p><strong>Meno:</strong> ${recenzia.meno}</p>
+                                <p><strong>Predával/a som:</strong> ${recenzia.co_predaval}</p>
+                                <p><strong>Názor:</strong> ${recenzia.nazor}</p>
+                            `;
+                    }
+                    recenzieDiv.appendChild(blok);
+                })
+            }
+        }
+
+        zobrazRecenzie();
+
+    </script>
+
+</body>
+
+<head>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #b30000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            left: 0;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: solid;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        li a:hover {
+            background-color: #800000;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #b30000;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: large;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #b30000;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: large;
+        }
+
+        input[type=submit]:hover {
+            background-color: #800000;
+        }
+
+        .ramcek {
+            border-radius: 20px;
+            border: 5px solid #b30000;
+            padding: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: large;
+            font-weight: 400;
+        }
+
+        .ramcek_shadow {
+            background-color: white;
+            color: black;
+            border-radius: 15px;
+            padding: 5px;
+            margin: 5px;
+            box-shadow: 0 4px 8px gray;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-bottom: 20px;
+        }
+
+        p.font_extra {
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+            font-size: xx-large;
+            font-weight: bolder;
+        }
+
+        p.font_velky {
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+            font-size: large;
+            font-weight: bolder;
+        }
+
+        img.obrazok {
+            height: auto;
+            width: 650px;
+            border-radius: 20px;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        p.font_normal {
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+            font-size: large;
+            font-weight: 300;
+        }
+    </style>
+</head>
+
 </html>
